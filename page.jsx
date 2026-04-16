@@ -1,40 +1,52 @@
 "use client";
 import React from 'react';
 
-export default function Page() {
+export default function GlowHub() {
+  // HER ER DINE RIGTIGE DATA FRA DINE BILLEDER
   const appointments = [
-    { time: "09:22", title: "Opsamling: Transport", color: "#94a3b8" },
-    { time: "11:00", title: "Samtale: Dorte L", color: "#3b82f6" },
-    { time: "06:22", title: "Transport (Fre)", color: "#94a3b8" },
-    { time: "08:00", title: "Dialyse (Fre)", color: "#ef4444" },
-    { time: "11:30", title: "Dialyse (Søn)", color: "#ef4444" },
-    { time: "12:30", title: "Karkirurgi (8/5)", color: "#10b981" }
+    { time: "09:22", title: "Opsamling: Transport", loc: "Klausdalsbrov. 275", color: "border-gray-500" },
+    { time: "11:00", title: "Samtale: Dorte L", loc: "Rigshospitalet", color: "border-blue-500" },
+    { time: "06:22", title: "Transport (Fredag)", loc: "Klausdalsbrov. 275", color: "border-gray-500" },
+    { time: "08:00", title: "Dialyse (Fredag)", loc: "Klinik 8601", color: "border-red-500" },
+    { time: "11:30", title: "Dialyse (Søndag)", loc: "Klinik 8601", color: "border-red-500" },
+    { time: "12:30", title: "Karkirurgi (8/5)", loc: "Klinik 3111", color: "border-green-500" }
   ];
 
   return (
-    <div style={{ backgroundColor: '#020106', color: 'white', minHeight: '100vh', padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1 style={{ fontStyle: 'italic', fontWeight: '900', fontSize: '28px', marginBottom: '30px' }}>MIKS HUB</h1>
-      
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {appointments.map((apt, i) => (
-          <div key={i} style={{ 
-            padding: '18px', 
-            background: 'rgba(255,255,255,0.05)', 
-            borderRadius: '18px', 
-            borderLeft: `4px solid ${apt.color}`,
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
-            <span style={{ fontWeight: 'bold', fontSize: '15px' }}>{apt.title}</span>
-            <span style={{ opacity: 0.5, fontSize: '14px', fontWeight: '900' }}>{apt.time}</span>
+    <div className="min-h-screen bg-[#020106] text-white p-6 font-sans">
+      {/* HEADER & WEATHER */}
+      <div className="max-w-md mx-auto mb-10">
+        <div className="flex justify-between items-start mb-8">
+          <h1 className="text-4xl font-black italic tracking-tighter">Godmorgen Micki ☀️</h1>
+          <div className="bg-blue-600/20 border border-blue-500/30 p-4 rounded-3xl text-right">
+            <p className="text-xs font-bold text-blue-400">18° ☀️</p>
+            <p className="text-[8px] opacity-50 uppercase tracking-widest italic">Shorts-vejr</p>
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div style={{ marginTop: '40px', padding: '15px', borderRadius: '15px', border: '1px solid rgba(255,222,89,0.2)', display: 'flex', justifyContent: 'space-between' }}>
-         <span style={{ fontSize: '10px', color: '#ffde59', fontWeight: 'bold' }}>BIF_STATUS</span>
-         <span style={{ fontWeight: '900' }}>6. PLADS</span>
+        {/* APPOINTMENTS - DIT FLOTTE LAYOUT */}
+        <section>
+          <h2 className="text-[10px] font-black tracking-[0.3em] text-white/30 uppercase mb-6">Dagens Protokol</h2>
+          <div className="grid gap-4">
+            {appointments.map((apt, i) => (
+              <div key={i} className={`bg-white/5 border-l-4 ${apt.color} p-5 rounded-3xl backdrop-blur-xl flex justify-between items-center`}>
+                <div>
+                  <h3 className="font-bold text-lg">{apt.title}</h3>
+                  <p className="text-[10px] opacity-40 uppercase tracking-tighter">{apt.loc}</p>
+                </div>
+                <div className="text-right font-black text-xl tracking-tighter italic">
+                  {apt.time}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* BIF STATUS */}
+        <div className="mt-10 p-5 rounded-3xl bg-yellow-500/10 border border-yellow-500/20 flex justify-between items-center">
+          <span className="text-[10px] font-black uppercase tracking-widest text-yellow-500">BIF_LEAGUE</span>
+          <span className="text-xl font-black italic">6. PLADS</span>
+        </div>
       </div>
     </div>
   );
